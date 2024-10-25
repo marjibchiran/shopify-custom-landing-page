@@ -1,0 +1,59 @@
+<section>
+  <div class="container">
+    <h3 class="title_h3">{{ section.settings.title }}</h3>
+    <div class="row">
+      {% for block in section.blocks %}
+        <div class="col_3 col_6_m image_box_sec">
+          <!-- <div class="image_box_sec"> -->
+          {% if images != blank -%}
+            <img
+              class="box_image"
+              src="{{ block.settings.image | img_url:'800x' }}"
+              alt="{{ block.settings.image.title }}"
+            >
+          {%- endif %}
+          <h4 class="image_box_text">{{ block.settings.title }}</h4>
+          <!-- </div> -->
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image Box",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Text",
+      "default": "Here’s how AG1 works"
+    },
+  ],
+   "blocks": [
+  {
+    "type": "Imagebox",
+    "name": "Image Box",
+    "settings": [
+       {
+      "type": "text",
+      "id": "title",
+      "label": "Text",
+      "default": "Mix one scoop of AG1"
+    },
+        {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Upload Image"
+    }
+    ]
+  }
+  ],
+  "presets": [
+    {
+      "name": "Image Box"
+    }
+  ]
+}
+{% endschema %}

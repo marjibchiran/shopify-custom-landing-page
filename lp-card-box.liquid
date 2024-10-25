@@ -1,0 +1,206 @@
+{% liquid
+  assign title = section.settings.title
+  assign content = section.settings.content
+  assign link = section.settings.link
+  assign btntext = section.settings.btntext
+%}
+
+<section>
+  <div class="container">
+    <div class="row p_tb_50">
+      <div class="col_8 col cart_box_top">
+        <h3 class="title_h3">{{ title }}</h3>
+        <p class="des_type2">{{ content }}</p>
+      </div>
+      <!-- Column -->
+      <div class="col_4 col flex_end_end">
+        {% if link != blank %}
+          <a class="btn_style1" href="{{ link }}">{{ btntext }}</a>
+        {%- endif %}
+      </div>
+      <!-- Column -->
+    </div>
+    <!-- Row -->
+
+    <div class="row">
+      {% for block in section.blocks %}
+        {% liquid
+          assign img = block.settings.image
+          assign title = block.settings.title
+          assign content = block.settings.content
+          assign subtitle = block.settings.subtitle
+          assign subcontent = block.settings.subcontent
+          assign feedback_title = block.settings.feedback_title
+          assign feedback = block.settings.feedback
+          assign customer = block.settings.customer
+          assign date = block.settings.date
+        %}
+        <div class="col_6 col">
+          <!-- Singel Card Box Start -->
+          <div class="cart_box">
+            <!-- Singel Card Box Image -->
+            <div class="cart_img_box">
+              {% if images != blank %}
+                <img class="cart_box_img" src="{{ img | img_url:'1000x' }}" alt="{{title }}">
+              {%- endif %}
+            </div>
+            <!-- Singel Card Box Image -->
+            <div class="cart_box_content">
+              <h3 class="cart_box_title">{{ title }}</h3>
+              <p class="des_type4">{{ content }}*</p>
+            </div>
+            <!-- Top Right Icon Box -->
+            <div class="cart_icon">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+            <!-- Click Show Box -->
+            <div class="overlay_box">
+              <div class="cart_box_content">
+                <h3 class="cart_box_title">{{ subtitle }}</h3>
+                <p class="des_type4">{{ subcontent }}*</p>
+                <hr>
+                <div class="rev">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="des_type4">{{ feedback_title }}</p>
+                <p class="rev_text">“{{ feedback }}”</p>
+                <p class="rev_text_b">
+                  {{ customer }}
+                  {{ date }}
+                </p>
+              </div>
+            </div>
+            <!-- Click Show Box -->
+          </div>
+          <!-- Singel Card Box -->
+        </div>
+        <!-- Column -->
+      {% endfor %}
+    </div>
+    <!-- Row -->
+  </div>
+  <!-- Container -->
+</section>
+
+{% schema %}
+{
+  "name": "Card Box",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Text",
+      "default": "Whole body benefits in one scoop"
+    },
+      {
+      "type": "text",
+      "id": "content",
+      "label": "Content",
+      "default": "Even with the best diet, some nutrients can be hard to get. That’s why AG1 delivers optimal amounts of nutrients in forms that help your body thrive."
+    },
+    {
+      "type": "text",
+      "id": "btntext",
+      "label": "Button Text",
+      "default": "Full Ingredient List"
+    },
+     {
+      "type": "url",
+      "id": "link",
+      "label": "Url"
+    },
+  ],
+  "blocks": [
+    {
+      "name":"Cart Box",
+      "type": "cardbox",
+      "settings": [
+         {
+      "type": "text",
+      "id": "title",
+      "label": "Text",
+      "default": "Gut health"
+    },
+      {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default":"AG1 supports gut health with soothing, easy-to absorb ingredients that boost digestion and help ease bloating."
+    },
+      {"type": "text",
+      "id": "subtitle",
+      "label": "Text",
+      "default": "Gut health"
+    },
+      {
+      "type": "textarea",
+      "id": "subcontent",
+      "label": "Content",
+      "default":"AG1 supports gut health with soothing, easy-to absorb ingredients that boost digestion and help ease bloating."
+    },
+      {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Upload Image"
+    },
+        {
+      "type": "text",
+      "id": "feedback_title",
+      "label": "Content",
+      "default":"Noticeable change"
+    },
+        {
+      "type": "textarea",
+      "id": "feedback",
+      "label": "Feedback",
+      "default":"The impact on my gut health is amazing. That alone is worth using the product"
+    },{
+          "type": "text",
+          "id": "customer",
+          "label": "Customer",
+          "default": "John J"
+    },{
+          "type": "text",
+          "id": "date",
+          "label": "Review Date",
+          "default": "05/12/2024"
+    }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card Box"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  var acc = document.getElementsByClassName("cart_box");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          this.parentElement.classList.toggle("active");
+          // console.log(nextElementSibling)
+          // var overlay_box = this.nextElementSibling;
+
+          // // console.log(overlay_box)
+          // var overlay_box = document.getElementsByClassName("overlay_box");
+          // console.log(overlay_box)
+
+
+          // if (overlay_box.style.display === "block") {
+          //     overlay_box.style.display = "none";
+          // } else {
+          //     overlay_box.style.display = "block";
+          // }
+      });
+  }
+</script>

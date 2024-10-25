@@ -1,0 +1,91 @@
+{% liquid
+  assign title = section.settings.title
+  assign content = section.settings.content1
+  assign boldcontent = section.settings.content2
+  assign listtitle = section.settings.listtitle
+  assign image = section.settings.image
+%}
+
+<section>
+  <div class="container bg_c_p">
+    <div class="row j_space_b">
+      <div class="col_3 col">
+        <p class="title_h3">{{ title }}</p>
+        <p class="des_type2">
+          {{ content }}
+        </p>
+        <p class="des_type2 bold">{{ boldcontent }}</p>
+      </div>
+      <div class="col_8 col bg_light">
+        <div class="right_side row f_start">
+          <div class="col_5 center">
+            {% if image != blank %} <img src="{{ image | image_url : width: '1000x'}}" alt="{{ title }}">{% endif %}
+          </div>
+          <div class="col_6">
+            <h3 class="r_title">{{ listtitle }}</h3>
+            <hr>
+            {% for block in section.blocks %}
+              <p class="right_t des_type4">— {{ block.settings.feature }}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LP Features Sections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default":"More-in-one nutrition"
+    },
+      {
+      "type": "textarea",
+      "id": "content1",
+      "label": "Content 1",
+      "default":"AG1 is designed to replace multiple supplements by covering nutritional gaps with a comprehensive blend of nutrients. Just one tasty scoop each day helps meet your foundational health needs.*"
+    },
+      {
+      "type": "textarea",
+      "id": "content2",
+      "label": "Content 2",
+      "default":"Simply put, it’s a way to invest in your health now and in the long run."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "listtitle",
+      "label": "List Title",
+      "default": "AG1 CONTAINS YOUR"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featurelist",
+      "name": "Feature List",
+      "settings": [
+        {
+      "type": "text",
+      "id": "feature",
+      "label": "Feature",
+      "default": "Multivitamin"
+    }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LP Features Sections"
+    }
+  ]
+}
+{% endschema %}

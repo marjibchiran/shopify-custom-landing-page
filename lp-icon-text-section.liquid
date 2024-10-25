@@ -1,0 +1,56 @@
+<section>
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+        <div class="col_4 col">
+          <!-- Single List Icon Start -->
+          <div class="list_item row f_start a_center ">
+            {% if block.settings.icon != blank %}
+              <div class="item_img col_2">
+                <img src="{{ block.settings.icon | img_url:'200x' }}" alt="{{ block.settings.icon.alt }}">
+              </div>
+            {% endif %}
+            <div class="item_content col_9">
+              <p class="item_text">{{ block.settings.title }}</p>
+            </div>
+          </div>
+          <!-- Single List Icon End -->
+        </div>
+        <!-- Column -->
+      {% endfor %}
+    </div>
+    <!-- Row -->
+  </div>
+  <!-- Container -->
+</section>
+
+{% schema %}
+{
+  "name": "Icon Text Section",
+  "settings": [],
+  "blocks": [
+  {
+    "type": "Icon",
+    "name": "Icon Text",
+    "settings": [
+       {
+      "type": "text",
+      "id": "title",
+      "label": "Text",
+      "default": "75 ingredients your body can easily absorb"
+    },
+        {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Upload Icon"
+    }
+    ]
+  }
+  ],
+  "presets": [
+    {
+      "name": "Icon Text Section"
+    }
+  ]
+}
+{% endschema %}
